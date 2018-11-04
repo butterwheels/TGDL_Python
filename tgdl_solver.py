@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Solver for the TGDL in 2D with a one dimensional external potential."""
+"""Solver for the TGDL in 2D with a one dimensional external potential.
+
+Parameters must be choosen in order to obey the stability condition here:
+https://en.wikipedia.org/wiki/Von_Neumann_stability_analysis
+"""
 import numpy as np
 import tgdl_functions as tf
 import multiprocessing as mp
