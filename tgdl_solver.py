@@ -16,7 +16,7 @@ data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
 # Define square grid length (float or int)
 grid_length = 50.
 # Define number of grid points (int)
-n_points = 500
+n_points = 250
 # Define Point spacing
 dx = grid_length / n_points
 # Set time step
