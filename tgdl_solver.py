@@ -24,12 +24,12 @@ n_points = 250
 # Define Point spacing
 dx = grid_length / n_points
 # Set time step
-delta_time = 0.01 * dx ** 2.
+delta_time = 0.1 * dx ** 2.
 
 neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
 tf.get_all_neighbours(neighbours, n_points)
 
-sample_times = np.linspace(0, 10, 100)
+sample_times = np.linspace(0, 30, 300)
 
 
 # Start the clock to estimate the total time taken for this lattice size
