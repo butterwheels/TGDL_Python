@@ -89,4 +89,10 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
         os.makedirs(data_loc)
     np.save(data_loc + data_name, snapshots)
     np.save(data_loc + 'times', sample_times)
+    import matplotlib.pyplot as plt
+    fig, ax = plt.subplots(1, (1, 1))
+    ax.imshow(snapshots[:, :, -1], cmap='RdGy')
+    ax.set_xticks([])
+    ax.set_yticks([])
+    fig.savefig(data_loc + data_name + '.png', dpi=1000, format='png')
     return()
