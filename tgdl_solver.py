@@ -24,7 +24,7 @@ n_points = 100
 # Define Point spacing
 dx = grid_length / n_points
 # Set time step
-delta_time = 0.1 * dx ** 2.
+delta_time = 0.01 * dx ** 2.
 
 neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
 tf.get_all_neighbours(neighbours, n_points)
