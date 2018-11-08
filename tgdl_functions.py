@@ -4,14 +4,14 @@ import numpy as np
 from numba import jit, float64, int64
 
 
-# @jit(float64[:, :](float64[:, :]), nopython=True)
+@jit(float64[:, :](float64[:, :]), nopython=True)
 def potential_derivative(input_grid):
     """Evaluate the derivative of the potential at each point on the grid."""
     output_grid = 2. * input_grid * (1 - input_grid ** 2.)
     return(output_grid)
 
 
-# @jit(int64(int64[:, :, :], int64), nopython=True)
+@jit(int64(int64[:, :, :], int64), nopython=True)
 def get_all_neighbours(neighbours, n_points):
     """Get array to store the neighbours of all sites in the system."""
     for l in range(n_points):
@@ -28,14 +28,12 @@ def get_all_neighbours(neighbours, n_points):
     return(1)
 
 
-# @jit(float64[:, :](float64[:, :], float64[:, :], float64, int64[:, :, :]),
-#      nopython=True)
+@jit(float64[:, :](float64[:, :], float64[:, :], float64, int64[:, :, :]),
+     nopython=True)
 def compute_laplacian(grid_sol, delta_grid, dx, neighbours):
     """Compute the laplacian."""
     for i in range(delta_grid.shape[0]):
         for j in range(delta_grid.shape[1]):
-            neighbours %= delta_grid.shape[0]
-
             nbr_sum = 0
             for k in range(neighbours.shape[2]):
 
@@ -46,8 +44,8 @@ def compute_laplacian(grid_sol, delta_grid, dx, neighbours):
     return(delta_grid)
 
 
-# @jit(float64[:, :, :](float64, float64[:, :], float64[:, :], float64,
-#      float64, int64[:, :, :], float64[:], float64[:, :, :]), nopython=True)
+@jit(float64[:, :, :](float64, float64[:, :], float64[:, :], float64,
+     float64, int64[:, :, :], float64[:], float64[:, :, :]), nopython=True)
 def evolve_till_time(current_time, delta_grid, grid_sol,
                      delta_time, dx, neighbours, sample_times, snapshots):
     """Solve the pde untill sepcified time."""
@@ -63,6 +61,7 @@ def evolve_till_time(current_time, delta_grid, grid_sol,
         if current_time >= sample_times[counter]:
             snapshots[:, :, counter] = grid_sol.copy()
             counter += 1
+            print(current_time)
     return(snapshots)
 
 
@@ -90,7 +89,8 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
     np.save(data_loc + data_name, snapshots)
     np.save(data_loc + 'times', sample_times)
     import matplotlib.pyplot as plt
-    fig, ax = plt.subplots(1, (1, 1))
+    plt.switch_backend('agg')
+    fig, ax = plt.subplots(1, figsize=(1, 1))
     ax.imshow(snapshots[:, :, -1], cmap='RdGy')
     ax.set_xticks([])
     ax.set_yticks([])

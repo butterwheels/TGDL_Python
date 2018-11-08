@@ -12,7 +12,7 @@ import time
 # Define number of processes
 n_proc = 10
 # Define number of runs
-number_runs = 10
+number_runs = 100
 
 # Data location
 data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
@@ -20,11 +20,11 @@ data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
 # Define square grid length (float or int)
 grid_length = 1.
 # Define number of grid points (int)
-n_points = 50
+n_points = 250
 # Define Point spacing
 dx = grid_length / n_points
 # Set time step
-delta_time = 0.01 * dx ** 2.
+delta_time = 0.1 * dx ** 2.
 
 neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
 tf.get_all_neighbours(neighbours, n_points)
