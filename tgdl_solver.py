@@ -12,7 +12,7 @@ import time
 # Define number of processes
 n_proc = 10
 # Define number of runs
-number_runs = 100
+number_runs = 10
 
 # Data location
 data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
@@ -20,7 +20,7 @@ data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
 # Define square grid length (float or int)
 grid_length = 1.
 # Define number of grid points (int)
-n_points = 100
+n_points = 50
 # Define Point spacing
 dx = grid_length / n_points
 # Set time step

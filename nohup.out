@@ -1,0 +1,198 @@
+Process ForkPoolWorker-9:
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 84, in solve_tgdl
+    neighbours, sample_times, snapshots)
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 60, in evolve_till_time
+    neighbours))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 37, in compute_laplacian
+    neighbours %= delta_grid.shape[0]
+KeyboardInterrupt
+Process ForkPoolWorker-10:
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 84, in solve_tgdl
+    neighbours, sample_times, snapshots)
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 60, in evolve_till_time
+    neighbours))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 37, in compute_laplacian
+    neighbours %= delta_grid.shape[0]
+KeyboardInterrupt
+Process ForkPoolWorker-3:
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 84, in solve_tgdl
+    neighbours, sample_times, snapshots)
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 60, in evolve_till_time
+    neighbours))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 42, in compute_laplacian
+    nbr_sum += grid_sol[neighbours[0, i, k], neighbours[1, j, k]]
+KeyboardInterrupt
+Process ForkPoolWorker-7:
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 84, in solve_tgdl
+    neighbours, sample_times, snapshots)
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 60, in evolve_till_time
+    neighbours))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 37, in compute_laplacian
+    neighbours %= delta_grid.shape[0]
+KeyboardInterrupt
+Process ForkPoolWorker-4:
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 84, in solve_tgdl
+    neighbours, sample_times, snapshots)
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 60, in evolve_till_time
+    neighbours))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 40, in compute_laplacian
+    for k in range(neighbours.shape[2]):
+KeyboardInterrupt
+Process ForkPoolWorker-6:
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 84, in solve_tgdl
+    neighbours, sample_times, snapshots)
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 60, in evolve_till_time
+    neighbours))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 37, in compute_laplacian
+    neighbours %= delta_grid.shape[0]
+KeyboardInterrupt
+Process ForkPoolWorker-8:
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 84, in solve_tgdl
+    neighbours, sample_times, snapshots)
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 60, in evolve_till_time
+    neighbours))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 40, in compute_laplacian
+    for k in range(neighbours.shape[2]):
+KeyboardInterrupt
+Process ForkPoolWorker-5:
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 84, in solve_tgdl
+    neighbours, sample_times, snapshots)
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 60, in evolve_till_time
+    neighbours))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 37, in compute_laplacian
+    neighbours %= delta_grid.shape[0]
+KeyboardInterrupt
+Process ForkPoolWorker-2:
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 84, in solve_tgdl
+    neighbours, sample_times, snapshots)
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 60, in evolve_till_time
+    neighbours))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 37, in compute_laplacian
+    neighbours %= delta_grid.shape[0]
+KeyboardInterrupt
+Process ForkPoolWorker-1:
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 258, in _bootstrap
+    self.run()
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/process.py", line 93, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 84, in solve_tgdl
+    neighbours, sample_times, snapshots)
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 60, in evolve_till_time
+    neighbours))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 37, in compute_laplacian
+    neighbours %= delta_grid.shape[0]
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "./tgdl_solver.py", line 42, in <module>
+    output = [p.get() for p in results]
+  File "./tgdl_solver.py", line 42, in <listcomp>
+    output = [p.get() for p in results]
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 638, in get
+    self.wait(timeout)
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 635, in wait
+    self._event.wait(timeout)
+  File "/home/james/anaconda3/lib/python3.6/threading.py", line 551, in wait
+    signaled = self._cond.wait(timeout)
+  File "/home/james/anaconda3/lib/python3.6/threading.py", line 295, in wait
+    waiter.acquire()
+KeyboardInterrupt
+multiprocessing.pool.RemoteTraceback: 
+"""
+Traceback (most recent call last):
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 119, in worker
+    result = (True, func(*args, **kwds))
+  File "/home/james/Ising_Model_Codes/TGDL_Python/tgdl_functions.py", line 93, in solve_tgdl
+    fig, ax = plt.subplots(1, (1, 1))
+  File "/home/james/anaconda3/lib/python3.6/site-packages/matplotlib/pyplot.py", line 1176, in subplots
+    fig = figure(**fig_kw)
+  File "/home/james/anaconda3/lib/python3.6/site-packages/matplotlib/pyplot.py", line 539, in figure
+    **kwargs)
+  File "/home/james/anaconda3/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 171, in new_figure_manager
+    return cls.new_figure_manager_given_figure(num, fig)
+  File "/home/james/anaconda3/lib/python3.6/site-packages/matplotlib/backend_bases.py", line 177, in new_figure_manager_given_figure
+    canvas = cls.FigureCanvas(figure)
+  File "/home/james/anaconda3/lib/python3.6/site-packages/matplotlib/backends/backend_qt5agg.py", line 35, in __init__
+    super(FigureCanvasQTAggBase, self).__init__(figure=figure)
+  File "/home/james/anaconda3/lib/python3.6/site-packages/matplotlib/backends/backend_qt5.py", line 235, in __init__
+    _create_qApp()
+  File "/home/james/anaconda3/lib/python3.6/site-packages/matplotlib/backends/backend_qt5.py", line 122, in _create_qApp
+    raise RuntimeError('Invalid DISPLAY variable')
+RuntimeError: Invalid DISPLAY variable
+"""
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "./tgdl_solver.py", line 42, in <module>
+    output = [p.get() for p in results]
+  File "./tgdl_solver.py", line 42, in <listcomp>
+    output = [p.get() for p in results]
+  File "/home/james/anaconda3/lib/python3.6/multiprocessing/pool.py", line 644, in get
+    raise self._value
+RuntimeError: Invalid DISPLAY variable

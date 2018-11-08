@@ -4,14 +4,14 @@ import numpy as np
 from numba import jit, float64, int64
 
 
-@jit(float64[:, :](float64[:, :]), nopython=True)
+# @jit(float64[:, :](float64[:, :]), nopython=True)
 def potential_derivative(input_grid):
     """Evaluate the derivative of the potential at each point on the grid."""
     output_grid = 2. * input_grid * (1 - input_grid ** 2.)
     return(output_grid)
 
 
-@jit(int64(int64[:, :, :], int64), nopython=True)
+# @jit(int64(int64[:, :, :], int64), nopython=True)
 def get_all_neighbours(neighbours, n_points):
     """Get array to store the neighbours of all sites in the system."""
     for l in range(n_points):
@@ -28,8 +28,8 @@ def get_all_neighbours(neighbours, n_points):
     return(1)
 
 
-@jit(float64[:, :](float64[:, :], float64[:, :], float64, int64[:, :, :]),
-     nopython=True)
+# @jit(float64[:, :](float64[:, :], float64[:, :], float64, int64[:, :, :]),
+#      nopython=True)
 def compute_laplacian(grid_sol, delta_grid, dx, neighbours):
     """Compute the laplacian."""
     for i in range(delta_grid.shape[0]):
@@ -46,8 +46,8 @@ def compute_laplacian(grid_sol, delta_grid, dx, neighbours):
     return(delta_grid)
 
 
-@jit(float64[:, :, :](float64, float64[:, :], float64[:, :], float64,
-     float64, int64[:, :, :], float64[:], float64[:, :, :]), nopython=True)
+# @jit(float64[:, :, :](float64, float64[:, :], float64[:, :], float64,
+#      float64, int64[:, :, :], float64[:], float64[:, :, :]), nopython=True)
 def evolve_till_time(current_time, delta_grid, grid_sol,
                      delta_time, dx, neighbours, sample_times, snapshots):
     """Solve the pde untill sepcified time."""
