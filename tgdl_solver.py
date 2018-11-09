@@ -8,6 +8,7 @@ import numpy as np
 import tgdl_functions as tf
 import multiprocessing as mp
 import time
+import os
 
 # Define number of processes
 n_proc = 10
@@ -16,11 +17,13 @@ number_runs = 100
 
 # Data location
 data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
+if not os.path.exists(data_loc):
+    os.makedirs(data_loc)
 
 # Define square grid length (float or int)
-grid_length = 1.
+grid_length = 100.
 # Define number of grid points (int)
-n_points = 100
+n_points = 500
 # Define Point spacing
 dx = grid_length / n_points
 # Set time step
@@ -29,7 +32,7 @@ delta_time = 0.01 * dx ** 2.
 neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
 tf.get_all_neighbours(neighbours, n_points)
 
-sample_times = np.linspace(0, 1, 100)
+sample_times = np.linspace(0, 30, 300)
 
 
 # Start the clock to estimate the total time taken for this lattice size

@@ -2,13 +2,36 @@
 """Solver for the TGDL in 2D with a one dimensional external potential."""
 import numpy as np
 from numba import jit, float64, int64
+import uuid
+import matplotlib.pyplot as plt
 
 
-@jit(float64[:, :](float64[:, :]), nopython=True)
-def potential_derivative(input_grid):
+@jit(int64(float64[:, :], float64[:, :]), nopython=True)
+def potential_derivative(input_grid, output_grid):
     """Evaluate the derivative of the potential at each point on the grid."""
-    output_grid = 2. * input_grid * (1 - input_grid ** 2.)
-    return(output_grid)
+    for i in range(input_grid.shape[0]):
+        for j in range(input_grid.shape[1]):
+
+            output_grid[i, j] = (2 * input_grid[i, j] *
+                                 (1 - input_grid[i, j] ** 2.))
+    return(1)
+
+
+@jit(int64(float64[:, :], float64[:, :], int64[:, :, :], float64),
+     nopython=True)
+def compute_laplacian(input_grid, output_grid, neighbours, dx):
+    """Compute the laplacian."""
+    for i in range(input_grid.shape[0]):
+        for j in range(input_grid.shape[1]):
+
+            output_grid[i, j] = 0.
+            for k in range(neighbours.shape[2]):
+
+                output_grid[i, j] += input_grid[neighbours[0, i, k],
+                                                neighbours[1, j, k]]
+                output_grid[i, j] -= input_grid[i, j]
+    output_grid /= dx ** 2.
+    return(1)
 
 
 @jit(int64(int64[:, :, :], int64), nopython=True)
@@ -28,71 +51,48 @@ def get_all_neighbours(neighbours, n_points):
     return(1)
 
 
-@jit(float64[:, :](float64[:, :], float64[:, :], float64, int64[:, :, :]),
-     nopython=True)
-def compute_laplacian(grid_sol, delta_grid, dx, neighbours):
-    """Compute the laplacian."""
-    for i in range(delta_grid.shape[0]):
-        for j in range(delta_grid.shape[1]):
-            nbr_sum = 0
-            for k in range(neighbours.shape[2]):
+@jit(int64(float64[:], float64, float64[:, :], int64[:, :, :], float64,
+     float64[:, :, :]), nopython=True)
+def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
+                  snapshots):
+    """Get snapshots of coarsening evolution."""
+    current_time = np.float64(0)
+    counter = np.int32(0)
+    output_grid = np.zeros((grid_sol.shape[0], grid_sol.shape[1]),
+                           dtype=np.float64)
 
-                nbr_sum += grid_sol[neighbours[0, i, k], neighbours[1, j, k]]
-            delta_grid[i, j] = nbr_sum
-    delta_grid -= 4 * grid_sol
-    delta_grid /= (dx ** 2.)
-    return(delta_grid)
+    while counter < len(sample_times):
 
-
-@jit(float64[:, :, :](float64, float64[:, :], float64[:, :], float64,
-     float64, int64[:, :, :], float64[:], float64[:, :, :]), nopython=True)
-def evolve_till_time(current_time, delta_grid, grid_sol,
-                     delta_time, dx, neighbours, sample_times, snapshots):
-    """Solve the pde untill sepcified time."""
-    counter = 1
-    while current_time <= np.max(sample_times):
-
-        delta_grid[:, :] = 0
-        grid_sol += delta_time * (potential_derivative(grid_sol) +
-                                  compute_laplacian(grid_sol, delta_grid, dx,
-                                                    neighbours))
         current_time += delta_time
+        compute_laplacian(grid_sol, output_grid, neighbours, dx)
+        grid_sol = grid_sol + (delta_time * output_grid)
+        potential_derivative(grid_sol, output_grid)
+        grid_sol = grid_sol + (delta_time * output_grid)
 
         if current_time >= sample_times[counter]:
             snapshots[:, :, counter] = grid_sol.copy()
             counter += 1
-            print(current_time)
-    return(snapshots)
+    return(1)
 
 
 def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
     """Launch simulations to solve the TGDL."""
-    import os
-    import uuid
     np.random.seed()
-    # Initial grid
-    grid_sol = 2 * np.random.rand(n_points, n_points) - 1
-    # Setup array to store the change in grid over each time stip
-    delta_grid = np.zeros((n_points, n_points), dtype=np.float64)
-    # Set up current time
-    current_time = 0.
+    grid_sol = 2 * np.random.rand(n_points, n_points) - 1.0
 
-    snapshots = np.zeros((n_points, n_points, len(sample_times)))
-
-    evolve_till_time(current_time, delta_grid, grid_sol, delta_time, dx,
-                     neighbours, sample_times, snapshots)
-
-    # Get a unique string for the name of this quench
-    data_name = str(uuid.uuid4())
-    if not os.path.exists(data_loc):
-        os.makedirs(data_loc)
-    np.save(data_loc + data_name, snapshots)
+    snapshots = np.zeros((n_points, n_points, len(sample_times)),
+                         dtype=np.float64)
+    get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
+                  snapshots)
+    unique_string = str(uuid.uuid4())
+    np.save(data_loc + unique_string, snapshots)
     np.save(data_loc + 'times', sample_times)
-    import matplotlib.pyplot as plt
-    plt.switch_backend('agg')
+
     fig, ax = plt.subplots(1, figsize=(1, 1))
-    ax.imshow(snapshots[:, :, -1], cmap='RdGy')
+    fig.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.99)
+    ax.imshow(snapshots[:, :, -1], vmin=-1, vmax=1, cmap='RdGy')
     ax.set_xticks([])
     ax.set_yticks([])
-    fig.savefig(data_loc + data_name + '.png', dpi=1000, format='png')
+    fig.savefig(data_loc + unique_string + '.png', dpi=1000, format='png')
+
     return()
