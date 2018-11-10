@@ -79,6 +79,7 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
     """Launch simulations to solve the TGDL."""
     np.random.seed()
     grid_sol = 2 * np.random.rand(n_points, n_points) - 1.0
+    grid_sol = np.float32(grid_sol)
 
     snapshots = np.zeros((n_points, n_points, len(sample_times)),
                          dtype=np.float32)
