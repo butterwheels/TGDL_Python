@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Solver for the TGDL in 2D with a one dimensional external potential."""
 import numpy as np
-from numba import jit, float64, int64
+from numba import jit, float32, int64
 import uuid
 import matplotlib.pyplot as plt
 
 
-@jit(int64(float64[:, :], float64[:, :]), nopython=True)
+@jit(int64(float32[:, :], float32[:, :]), nopython=True)
 def potential_derivative(input_grid, output_grid):
     """Evaluate the derivative of the potential at each point on the grid."""
     for i in range(input_grid.shape[0]):
@@ -17,7 +17,7 @@ def potential_derivative(input_grid, output_grid):
     return(1)
 
 
-@jit(int64(float64[:, :], float64[:, :], int64[:, :, :], float64),
+@jit(int64(float32[:, :], float32[:, :], int64[:, :, :], float32),
      nopython=True)
 def compute_laplacian(input_grid, output_grid, neighbours, dx):
     """Compute the laplacian."""
@@ -51,15 +51,15 @@ def get_all_neighbours(neighbours, n_points):
     return(1)
 
 
-@jit(int64(float64[:], float64, float64[:, :], int64[:, :, :], float64,
-     float64[:, :, :]), nopython=True)
+@jit(int64(float32[:], float32, float32[:, :], int64[:, :, :], float32,
+     float32[:, :, :]), nopython=True)
 def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
                   snapshots):
     """Get snapshots of coarsening evolution."""
-    current_time = np.float64(0)
+    current_time = np.float32(0)
     counter = np.int32(0)
     output_grid = np.zeros((grid_sol.shape[0], grid_sol.shape[1]),
-                           dtype=np.float64)
+                           dtype=np.float32)
 
     while counter < len(sample_times):
 
@@ -81,7 +81,7 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
     grid_sol = 2 * np.random.rand(n_points, n_points) - 1.0
 
     snapshots = np.zeros((n_points, n_points, len(sample_times)),
-                         dtype=np.float64)
+                         dtype=np.float32)
     get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
                   snapshots)
     unique_string = str(uuid.uuid4())
