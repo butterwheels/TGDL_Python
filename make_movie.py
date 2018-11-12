@@ -1,18 +1,16 @@
 #!/usr/bin/env python3
 """Attempt to solve the ginzburg landau fomrualtion for 3 state potts."""
 import numpy as np
-import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.animation as manimation
 from mpl_toolkits.axes_grid1 import make_axes_locatable
 from matplotlib import rc
 import os
-matplotlib.use("Agg")
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman']})
 rc('text', usetex=True)
 
 load_path = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
-file_name = 'test_1.npy'
+file_name = 'diagonally_wound.npy'
 
 snapshots = np.load(load_path + file_name)
 sample_times = np.load(load_path + 'times.npy')
@@ -26,7 +24,7 @@ if not os.path.exists(save_path):
 FFMpegWriter = manimation.writers['ffmpeg']
 metadata = dict(title='TGDL mess around',
                 artist='James Denholm', comment='Movie support!')
-writer = FFMpegWriter(fps=10, metadata=metadata)
+writer = FFMpegWriter(fps=3, metadata=metadata)
 
 cmap = 'RdBu'
 
