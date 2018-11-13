@@ -10,7 +10,7 @@ rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman']})
 rc('text', usetex=True)
 
 load_path = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
-file_name = 'diagonally_wound.npy'
+file_name = 'test_1.npy'
 
 snapshots = np.load(load_path + file_name)
 sample_times = np.load(load_path + 'times.npy')
