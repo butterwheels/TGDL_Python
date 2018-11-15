@@ -32,14 +32,11 @@ delta_time = np.float32(0.01 * dx ** 2.)
 neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
 tf.get_all_neighbours(neighbours, n_points)
 
-sample_times = np.zeros(47, dtype=np.float32)
-sample_times[:21] = np.linspace(0, 2, 21, dtype=np.float32)
-sample_times[21:29] = np.linspace(3, 10, 8, dtype=np.float32)
-sample_times[29:38] = np.linspace(20, 100, 9, dtype=np.float32)
-sample_times[38:47] = np.linspace(200, 1000, 9, dtype=np.float32)
-
-sample_times[110:119] = np.linspace(200, 1000, 9, dtype=np.float32)
-
+sample_times = np.zeros(56, dtype=np.float32)
+sample_times[:31] = np.linspace(0, 3, 31, dtype=np.float32)
+sample_times[31:38] = np.linspace(4, 10, 7, dtype=np.float32)
+sample_times[38:47] = np.linspace(20, 100, 9, dtype=np.float32)
+sample_times[47:56] = np.linspace(200, 1000, 9, dtype=np.float32)
 
 # Start the clock to estimate the total time taken for this lattice size
 tic = time.time()
