@@ -38,9 +38,6 @@ sample_times[21:29] = np.linspace(3, 10, 8, dtype=np.float32)
 sample_times[29:38] = np.linspace(20, 100, 9, dtype=np.float32)
 sample_times[38:47] = np.linspace(200, 1000, 9, dtype=np.float32)
 
-sample_times[110:119] = np.linspace(200, 1000, 9, dtype=np.float32)
-
-
 # Start the clock to estimate the total time taken for this lattice size
 tic = time.time()
 # Launch the quenches as independent parallel processes
