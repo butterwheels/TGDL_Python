@@ -10,7 +10,7 @@ rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman']})
 rc('text', usetex=True)
 
 load_path = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
-file_name = 'test_1.npy'
+file_name = 'on_axis_stripe.npy'
 
 snapshots = np.load(load_path + file_name)
 sample_times = np.load(load_path + 'times.npy')
@@ -24,9 +24,9 @@ if not os.path.exists(save_path):
 FFMpegWriter = manimation.writers['ffmpeg']
 metadata = dict(title='TGDL mess around',
                 artist='James Denholm', comment='Movie support!')
-writer = FFMpegWriter(fps=3, metadata=metadata)
+writer = FFMpegWriter(fps=5, metadata=metadata)
 
-cmap = 'RdBu'
+cmap = 'RdGy'
 
 fig, ax = plt.subplots(1, figsize=(1.2, 1.1))
 fig.subplots_adjust(left=0.05, right=0.8, bottom=0.05)
