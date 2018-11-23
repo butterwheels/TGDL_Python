@@ -15,7 +15,7 @@ n_proc = 10
 # Define number of runs
 number_runs = 100
 
-# Data location
+# Where to save the numerical solutions
 data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
 if not os.path.exists(data_loc):
     os.makedirs(data_loc)
@@ -32,6 +32,7 @@ delta_time = np.float32(0.01 * dx ** 2.)
 neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
 tf.get_all_neighbours(neighbours, n_points)
 
+# Set points in time at which to store the solution
 sample_times = np.zeros(56, dtype=np.float32)
 sample_times[:31] = np.linspace(0, 3, 31, dtype=np.float32)
 sample_times[31:38] = np.linspace(4, 10, 7, dtype=np.float32)

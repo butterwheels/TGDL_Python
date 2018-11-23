@@ -9,13 +9,14 @@ import os
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern Roman']})
 rc('text', usetex=True)
 
+# Path to the location you want to make a movei of
 load_path = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
-file_name = 'ground.npy'
+file_name = 'on_axis_stripe.npy'
 
 snapshots = np.load(load_path + file_name)
 sample_times = np.load(load_path + 'times.npy')
 
-
+# Where to save the movie
 file_name = 'the_video'
 save_path = ('/home/james/Ising_Model_Codes/TGDL_movies/')
 if not os.path.exists(save_path):
