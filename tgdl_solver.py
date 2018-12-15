@@ -33,11 +33,10 @@ neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
 tf.get_all_neighbours(neighbours, n_points)
 
 # Set points in time at which to store the solution
-sample_times = np.zeros(56, dtype=np.float32)
-sample_times[:31] = np.linspace(0, 3, 31, dtype=np.float32)
-sample_times[31:38] = np.linspace(4, 10, 7, dtype=np.float32)
-sample_times[38:47] = np.linspace(20, 100, 9, dtype=np.float32)
-sample_times[47:56] = np.linspace(200, 1000, 9, dtype=np.float32)
+sample_times = np.zeros(1096, dtype=np.float32)
+sample_times[:101] = np.linspace(0, 5, 101, dtype=np.float32)
+sample_times[101:] = np.linspace(6, 1000, 995, dtype=np.float32)
+
 
 # Start the clock to estimate the total time taken for this lattice size
 tic = time.time()
