@@ -11,7 +11,7 @@ import time
 import os
 
 # Define number of processes
-n_proc = 10
+n_proc = 15
 # Define number of runs
 number_runs = 100
 
