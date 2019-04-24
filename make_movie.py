@@ -8,9 +8,9 @@ import os
 plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
-# Path to the location you want to make a movei of
+# Path to the location you want to make a movie of
 load_path = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
-file_name = 'off_axis_1.npy'
+file_name = 'test.npy'
 
 snapshots = np.load(load_path + file_name)
 sample_times = np.load(load_path + 'times.npy')
@@ -24,9 +24,9 @@ if not os.path.exists(save_path):
 FFMpegWriter = manimation.writers['ffmpeg']
 metadata = dict(title='TGDL mess around',
                 artist='James Denholm', comment='Movie support!')
-writer = FFMpegWriter(fps=2, metadata=metadata)
+writer = FFMpegWriter(fps=25, metadata=metadata)
 
-cmap = 'RdGy'
+cmap = 'RdPu'
 
 fig, ax = plt.subplots(1, figsize=(1.2, 1.1))
 fig.subplots_adjust(left=0.05, right=0.8, bottom=0.05)
@@ -53,7 +53,7 @@ with writer.saving(fig, save_path + file_name + '.mp4', dpi=1000):
     for i in range(1, snapshots.shape[2]):
 
         im = ax.imshow(snapshots[:, :, i], cmap=cmap, vmin=-1, vmax=1)
-        ax.set_title('t = %0.2f' % sample_times[i], fontsize=8)
+        ax.set_title('t = %0.3f' % sample_times[i], fontsize=8)
         ax.set_xticks([])
         ax.set_yticks([])
         writer.grab_frame()
