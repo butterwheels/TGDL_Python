@@ -4,7 +4,7 @@ import numpy as np
 from numba import jit, float32, int64
 import uuid
 import matplotlib.pyplot as plt
-plt.switch_backend("agg")
+# plt.switch_backend("agg")
 
 
 @jit(int64(float32[:, :], float32[:, :]), nopython=True)
@@ -53,7 +53,7 @@ def get_all_neighbours(neighbours, n_points):
 
 
 @jit(int64(float32[:], float32, float32[:, :], int64[:, :, :], float32,
-     float32[:, :, :]), nopython=True)
+           float32[:, :, :]), nopython=True)
 def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
                   snapshots):
     """Get snapshots of coarsening evolution."""
@@ -76,14 +76,39 @@ def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
     return(1)
 
 
+@jit(nopython=True)
+def random_shuffle_grid(input_grid):
+    """Random shuffle the input grid."""
+    for i in range(input_grid.shape[0]):
+        for j in range(input_grid.shape[1]):
+
+            swap_i = np.random.randint(input_grid.shape[0])
+            swap_j = np.random.randint(input_grid.shape[1])
+
+            site_val = input_grid[i, j]
+            swap_val = input_grid[swap_i, swap_j]
+
+            input_grid[i, j] = swap_val
+            input_grid[swap_i, swap_i] = site_val
+    return()
+
+
 def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
     """Launch simulations to solve the TGDL."""
     np.random.seed()
-    grid_sol = 2 * np.random.rand(n_points, n_points) - 1.0
-    grid_sol = np.float32(grid_sol)
-
+    # Initialize array to hold field at each grid point
+    grid_sol = np.zeros(n_points ** 2, dtype=np.float32)
+    # Set half the initial condition to m = 1
+    grid_sol[0::2] = 1
+    grid_sol[1::2] = -1
+    # Set half the initial condition to m = -1
+    grid_sol = np.reshape(grid_sol, (n_points, n_points))
+    # Random order the initial condition
+    random_shuffle_grid(grid_sol)
+    # Set up array to hold snapshots of the solution
     snapshots = np.zeros((n_points, n_points, len(sample_times)),
                          dtype=np.float32)
+    # Get the snapshots
     get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
                   snapshots)
     unique_string = str(uuid.uuid4())

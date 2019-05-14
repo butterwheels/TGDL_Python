@@ -24,9 +24,9 @@ if not os.path.exists(save_path):
 FFMpegWriter = manimation.writers['ffmpeg']
 metadata = dict(title='TGDL mess around',
                 artist='James Denholm', comment='Movie support!')
-writer = FFMpegWriter(fps=25, metadata=metadata)
+writer = FFMpegWriter(fps=5, metadata=metadata)
 
-cmap = 'RdPu'
+cmap = 'RdBu'
 
 fig, ax = plt.subplots(1, figsize=(1.2, 1.1))
 fig.subplots_adjust(left=0.05, right=0.8, bottom=0.05)
