@@ -4,7 +4,7 @@ import numpy as np
 from numba import jit, float32, int64
 import uuid
 import matplotlib.pyplot as plt
-# plt.switch_backend("agg")
+plt.switch_backend("agg")
 
 
 @jit(int64(float32[:, :], float32[:, :]), nopython=True)
