@@ -118,7 +118,7 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
 
     fig, ax = plt.subplots(1, figsize=(1, 1))
     fig.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.99)
-    ax.imshow(snapshots[:, :, -1], vmin=-1, vmax=1, cmap='RdGy')
+    ax.imshow(snapshots[:, :, -1], vmin=-1, vmax=1, cmap='RdBu')
     ax.set_xticks([])
     ax.set_yticks([])
     fig.savefig(data_loc + unique_string + '.png', dpi=1000, format='png')
