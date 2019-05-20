@@ -23,7 +23,7 @@ if not os.path.exists(data_loc):
 # Define square grid length (float or int)
 grid_length = 100.
 # Define number of grid points (int)
-n_points = 500
+n_points = 501
 # Define Point spacing
 dx = np.float32(grid_length / n_points)
 # Set time step
@@ -33,7 +33,8 @@ neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
 tf.get_all_neighbours(neighbours, n_points)
 
 # Set points in time at which to store the solution
-sample_times = np.logspace(-1, 3, 500, dtype=np.float32)
+sample_times = np.zeros(501, dtype=np.float32)
+sample_times[1:] = np.logspace(-1, 3, 500, dtype=np.float32)
 
 
 # Start the clock to estimate the total time taken for this lattice size
