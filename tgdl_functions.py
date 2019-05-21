@@ -53,9 +53,9 @@ def get_all_neighbours(neighbours, n_points):
 
 
 @jit(int64(float32[:], float32, float32[:, :], int64[:, :, :], float32,
-           float32[:, :, :]), nopython=True)
+           float32[:, :, :], float32[:]), nopython=True)
 def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
-                  snapshots):
+                  snapshots, measured_times):
     """Get snapshots of coarsening evolution."""
     current_time = np.float32(0)
     counter = np.int32(1)
@@ -73,6 +73,7 @@ def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
 
         if current_time >= sample_times[counter]:
             snapshots[:, :, counter] = grid_sol.copy()
+            measured_times[counter] = current_time
             counter += 1
     return(1)
 
@@ -100,6 +101,9 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
     # Initialize array to hold field at each grid point
     grid_sol = np.zeros(n_points ** 2, dtype=np.float32)
     # Set half the initial condition to m = 1
+    # Actual times
+    measured_times = np.zeros(len(sample_times), dtype=np.float32)
+    # Initial condition
     grid_sol[0::2] = 1
     grid_sol[1::2] = -1
     # Set half the initial condition to m = -1
@@ -111,10 +115,11 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
                          dtype=np.float32)
     # Get the snapshots
     get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
-                  snapshots)
+                  snapshots, measured_times)
     unique_string = str(uuid.uuid4())
     np.save(data_loc + unique_string, snapshots)
     np.save(data_loc + 'times', sample_times)
+    np.save(data_loc + 'times', measured_times)
 
     fig, ax = plt.subplots(1, figsize=(1, 1))
     fig.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.99)
