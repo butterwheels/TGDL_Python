@@ -23,7 +23,7 @@ if not os.path.exists(data_loc):
 # Define square grid length (float or int)
 grid_length = 100.
 # Define number of grid points (int)
-n_points = 501
+n_points = 500
 # Define Point spacing
 dx = np.float32(grid_length / n_points)
 # Set time step
