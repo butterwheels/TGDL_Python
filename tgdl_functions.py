@@ -61,7 +61,7 @@ def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
     counter = np.int32(1)
     output_grid = np.zeros((grid_sol.shape[0], grid_sol.shape[1]),
                            dtype=np.float32)
-    snapshots[:, :, counter] = grid_sol.copy()
+    snapshots[:, :, 0] = grid_sol.copy()
 
     while counter < len(sample_times):
 
