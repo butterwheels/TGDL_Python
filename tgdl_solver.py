@@ -21,20 +21,25 @@ if not os.path.exists(data_loc):
     os.makedirs(data_loc)
 
 # Define square grid length (float or int)
-grid_length = 100.
+grid_length = 1.
 # Define number of grid points (int)
 n_points = 500
 # Define Point spacing
-dx = np.float32(grid_length / n_points)
+dx = np.float64(grid_length / n_points)
 # Set time step
-delta_time = np.float32(0.01 * dx ** 2.)
+delta_time = np.float64(1. * dx ** 2.)
+
+print(delta_time / (dx * dx))
+
 
 neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
 tf.get_all_neighbours(neighbours, n_points)
 
+n_times = 201
+
 # Set points in time at which to store the solution
-sample_times = np.zeros(501, dtype=np.float32)
-sample_times[1:] = np.logspace(-1, 3, 500, dtype=np.float32)
+sample_times = np.zeros(n_times, dtype=np.float64)
+sample_times[1:] = np.logspace(-4, 0, n_times - 1, dtype=np.float64)
 
 
 # Start the clock to estimate the total time taken for this lattice size
