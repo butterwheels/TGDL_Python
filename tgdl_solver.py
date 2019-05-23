@@ -13,7 +13,7 @@ import os
 # Define number of processes
 n_proc = 15
 # Define number of runs
-number_runs = 100
+number_runs = 15
 
 # Where to save the numerical solutions
 data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
