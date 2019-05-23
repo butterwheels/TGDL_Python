@@ -118,8 +118,8 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
                   snapshots, measured_times)
     unique_string = str(uuid.uuid4())
     np.save(data_loc + unique_string, snapshots)
-    np.save(data_loc + 'times', sample_times)
-    np.save(data_loc + 'times', measured_times)
+    np.save(data_loc + 'aimed_times', sample_times)
+    np.save(data_loc + 'measured_times', measured_times)
 
     fig, ax = plt.subplots(1, figsize=(1, 1))
     fig.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.99)
