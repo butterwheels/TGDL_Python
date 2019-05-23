@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Solver for the TGDL in 2D with a one dimensional external potential."""
 import numpy as np
-from numba import jit, float64, int64
+from numba import jit, float32, int64
 import uuid
 import matplotlib.pyplot as plt
 # plt.switch_backend("agg")
 
 
-@jit(int64(float64[:, :], float64[:, :]), nopython=True)
+@jit(int64(float32[:, :], float32[:, :]), nopython=True)
 def potential_derivative(input_grid, output_grid):
     """Evaluate the derivative of the potential at each point on the grid."""
     for i in range(input_grid.shape[0]):
@@ -18,7 +18,7 @@ def potential_derivative(input_grid, output_grid):
     return(1)
 
 
-@jit(int64(float64[:, :], float64[:, :], int64[:, :, :], float64),
+@jit(int64(float32[:, :], float32[:, :], int64[:, :, :], float32),
      nopython=True)
 def compute_laplacian(input_grid, output_grid, neighbours, dx):
     """Compute the laplacian."""
@@ -31,7 +31,7 @@ def compute_laplacian(input_grid, output_grid, neighbours, dx):
                 output_grid[i, j] += input_grid[neighbours[0, i, k],
                                                 neighbours[1, j, k]]
                 output_grid[i, j] -= input_grid[i, j]
-    # output_grid /= dx ** 2.
+    output_grid /= dx ** 2.
     return(1)
 
 
@@ -52,15 +52,15 @@ def get_all_neighbours(neighbours, n_points):
     return(1)
 
 
-@jit(int64(float64[:], float64, float64[:, :], int64[:, :, :], float64,
-           float64[:, :, :], float64[:]), nopython=True)
+@jit(int64(float32[:], float32, float32[:, :], int64[:, :, :], float32,
+           float32[:, :, :], float32[:]), nopython=True)
 def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
                   snapshots, measured_times):
     """Get snapshots of coarsening evolution."""
-    current_time = np.float64(0)
+    current_time = np.float32(0)
     counter = np.int32(1)
     output_grid = np.zeros((grid_sol.shape[0], grid_sol.shape[1]),
-                           dtype=np.float64)
+                           dtype=np.float32)
     snapshots[:, :, 0] = grid_sol.copy()
 
     while counter < len(sample_times):
@@ -99,10 +99,10 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
     """Launch simulations to solve the TGDL."""
     np.random.seed()
     # Initialize array to hold field at each grid point
-    grid_sol = np.zeros(n_points ** 2, dtype=np.float64)
+    grid_sol = np.zeros(n_points ** 2, dtype=np.float32)
     # Set half the initial condition to m = 1
     # Actual times
-    measured_times = np.zeros(len(sample_times), dtype=np.float64)
+    measured_times = np.zeros(len(sample_times), dtype=np.float32)
     # Initial condition
     grid_sol[0::2] = 1
     grid_sol[1::2] = -1
@@ -112,7 +112,7 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
     random_shuffle_grid(grid_sol)
     # Set up array to hold snapshots of the solution
     snapshots = np.zeros((n_points, n_points, len(sample_times)),
-                         dtype=np.float64)
+                         dtype=np.float32)
     # Get the snapshots
     get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
                   snapshots, measured_times)
@@ -120,6 +120,9 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
     np.save(data_loc + unique_string, snapshots)
     np.save(data_loc + 'aimed_times', sample_times)
     np.save(data_loc + 'measured_times', measured_times)
+
+    print(np.min(grid_sol))
+    print(np.max(grid_sol))
 
     fig, ax = plt.subplots(1, figsize=(1, 1))
     fig.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.99)

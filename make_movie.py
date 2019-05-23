@@ -10,10 +10,10 @@ plt.rc('font', family='serif')
 
 # Path to the location you want to make a movie of
 load_path = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
-file_name = 'on_axis.npy'
+file_name = 'test.npy'
 
 snapshots = np.load(load_path + file_name)
-sample_times = np.load(load_path + 'times.npy')
+sample_times = np.load(load_path + 'measured_times.npy')
 
 # Where to save the movie
 file_name = file_name[:-4]
