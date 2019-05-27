@@ -11,9 +11,9 @@ import time
 import os
 
 # Define number of processes
-n_proc = 12
+n_proc = 1
 # Define number of runs
-number_runs = 100
+number_runs = 1
 
 # Where to save the numerical solutions
 data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
@@ -21,15 +21,15 @@ if not os.path.exists(data_loc):
     os.makedirs(data_loc)
 
 # Define square grid length (float or int)
-grid_length = 500
+grid_length = 512
 # Define number of grid points (int)
-n_points = grid_length
+n_points = 512
 # Define Point spacing
 dx = np.float32(grid_length / n_points)
 # Set time step
-delta_time = np.float32(0.1 * dx ** 2.)
+delta_time = np.float32(0.001 * dx ** 2)
 
-print(delta_time / (dx * dx))
+print("The time step is %f" % delta_time)
 
 
 neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
@@ -39,7 +39,7 @@ n_times = 301
 
 # Set points in time at which to store the solution
 sample_times = np.zeros(n_times, dtype=np.float32)
-sample_times[1:] = np.logspace(-5, 4, n_times - 1, dtype=np.float32)
+sample_times[1:] = np.logspace(0, 4, n_times - 1, dtype=np.float32)
 
 # Start the clock to estimate the total time taken for this lattice size
 tic = time.time()

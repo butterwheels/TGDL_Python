@@ -4,7 +4,7 @@ import numpy as np
 from numba import jit, float32, int64
 import uuid
 import matplotlib.pyplot as plt
-# plt.switch_backend("agg")
+plt.switch_backend("agg")
 
 
 @jit(int64(float32[:, :], float32[:, :]), nopython=True)
@@ -28,9 +28,9 @@ def compute_laplacian(input_grid, output_grid, neighbours, dx):
             output_grid[i, j] = 0.
             for k in range(neighbours.shape[2]):
 
-                output_grid[i, j] += input_grid[neighbours[0, i, k],
-                                                neighbours[1, j, k]]
-                output_grid[i, j] -= input_grid[i, j]
+                output_grid[i, j] += (input_grid[neighbours[0, i, k],
+                                                 neighbours[1, j, k]])
+            output_grid[i, j] -= 4 * input_grid[i, j]
     output_grid /= dx ** 2.
     return(1)
 
@@ -61,7 +61,7 @@ def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
     counter = np.int32(1)
     output_grid = np.zeros((grid_sol.shape[0], grid_sol.shape[1]),
                            dtype=np.float32)
-    snapshots[:, :, 0] = grid_sol.copy()
+    snapshots[:, :, 0] = grid_sol
 
     while counter < len(sample_times):
 
@@ -72,7 +72,7 @@ def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
         grid_sol += (delta_time * output_grid)
 
         if current_time >= sample_times[counter]:
-            snapshots[:, :, counter] = grid_sol.copy()
+            snapshots[:, :, counter] = grid_sol
             measured_times[counter] = current_time
             counter += 1
     return(1)
@@ -121,12 +121,9 @@ def solve_tgdl(n_points, dx, neighbours, sample_times, data_loc, delta_time):
     np.save(data_loc + 'aimed_times', sample_times)
     np.save(data_loc + 'measured_times', measured_times)
 
-    print(np.min(grid_sol))
-    print(np.max(grid_sol))
-
     fig, ax = plt.subplots(1, figsize=(1, 1))
     fig.subplots_adjust(left=0.01, right=0.99, bottom=0.01, top=0.99)
-    ax.imshow(snapshots[:, :, -1], vmin=-1, vmax=1, cmap='RdBu')
+    ax.imshow(snapshots[:, :, -1], vmin=-1, vmax=1, cmap='RdPu')
     ax.set_xticks([])
     ax.set_yticks([])
     fig.savefig(data_loc + unique_string + '.png', dpi=1000, format='png')
