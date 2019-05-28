@@ -75,6 +75,7 @@ def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
             snapshots[:, :, counter] = grid_sol
             measured_times[counter] = current_time
             counter += 1
+            print(current_time)
     return(1)
 
 
