@@ -19,9 +19,9 @@ data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
 if not os.path.exists(data_loc):
     os.makedirs(data_loc)
 # Define square grid length (float or int)
-grid_length = 512
+grid_length = 256
 # Define number of grid points (int)
-n_points = 512
+n_points = 256
 # Define Point spacing
 dx = np.float32(grid_length / n_points)
 # Set time step
