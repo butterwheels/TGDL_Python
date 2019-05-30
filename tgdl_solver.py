@@ -45,7 +45,7 @@ n_snaps = 501
 # Array tol hold points in time at which to store current state of the grid
 sample_times = np.zeros(n_snaps, dtype=np.float32)
 # Set log spaced points in time
-sample_times[1:] = np.logspace(-2, 1, n_snaps - 1, dtype=np.float32)
+sample_times[1:] = np.logspace(-2, 3, n_snaps - 1, dtype=np.float32)
 # Start the clock to estimate the total time taken for this lattice size
 tic = time.time()
 # Launch the quenches as independent parallel processes
