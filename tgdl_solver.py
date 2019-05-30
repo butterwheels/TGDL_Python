@@ -11,17 +11,17 @@ import time
 import os
 
 # Define number of processes
-n_proc = 1
+n_proc = 15
 # Define number of runs
-number_runs = 1
+number_runs = 100
 # Where to save the numerical solutions
 data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
 if not os.path.exists(data_loc):
     os.makedirs(data_loc)
-# Define square grid length (float or int)
+# Define square grid length (int)
 grid_length = 128
 # Define number of grid points (int)
-n_points = 128
+n_points = 4 * grid_length
 # Define Point spacing
 dx = np.float32(grid_length / n_points)
 # Set time step
@@ -34,7 +34,7 @@ if VN <= 0.5:
     print("Von Neumann stability criterion met, %0.2f <= 0.5" % VN)
 else:
     # Print warning and stop the program
-    print("Unstable time step to spacing ratio, aborting")
+    print("Unstable time step to spacing ratio %0.2f, aborting" % VN)
     exit()
 # Array to hold the nearst neighbours of each grid point
 neighbours = np.zeros((2, n_points, 4), dtype=np.int64)
@@ -45,7 +45,7 @@ n_snaps = 501
 # Array tol hold points in time at which to store current state of the grid
 sample_times = np.zeros(n_snaps, dtype=np.float32)
 # Set log spaced points in time
-sample_times[1:] = np.logspace(-2, 4, n_snaps - 1, dtype=np.float32)
+sample_times[1:] = np.logspace(-2, 1, n_snaps - 1, dtype=np.float32)
 # Start the clock to estimate the total time taken for this lattice size
 tic = time.time()
 # Launch the quenches as independent parallel processes
