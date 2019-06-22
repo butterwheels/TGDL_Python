@@ -10,7 +10,7 @@ plt.rc('font', family='serif')
 
 # Path to the location you want to make a movie of
 load_path = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
-file_name = 'test.npy'
+file_name = 'diagonal.npy'
 
 snapshots = np.load(load_path + file_name)
 sample_times = np.load(load_path + 'measured_times.npy')
@@ -26,7 +26,7 @@ metadata = dict(title='TGDL mess around',
                 artist='James Denholm', comment='Movie support!')
 writer = FFMpegWriter(fps=10, metadata=metadata)
 
-cmap = 'RdPu'
+cmap = 'RdGy'
 
 fig, ax = plt.subplots(1, figsize=(1.2, 1.1))
 fig.subplots_adjust(left=0.05, right=0.8, bottom=0.05)
@@ -50,11 +50,11 @@ with writer.saving(fig, save_path + file_name + '.mp4', dpi=1000):
 
     writer.grab_frame()
 
-    for i in range(1, snapshots.shape[2]):
+    for i in range(0, snapshots.shape[2]):
 
         print("%i / %i" % (i + 1, snapshots.shape[2]))
         im = ax.imshow(snapshots[:, :, i], cmap=cmap, vmin=-1, vmax=1)
-        ax.set_title('t = %0.3f' % sample_times[i], fontsize=8)
+        ax.set_title('t = %0.5f' % sample_times[i], fontsize=8)
         ax.set_xticks([])
         ax.set_yticks([])
         writer.grab_frame()
