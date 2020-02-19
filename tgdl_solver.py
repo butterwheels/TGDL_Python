@@ -16,15 +16,15 @@ def main():
     # Define number of processes
     n_proc = 15
     # Define number of runs
-    number_runs = 100
+    number_runs = 1
     # Where to save the numerical solutions
     data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
     if not os.path.exists(data_loc):
         os.makedirs(data_loc)
     # Define square grid length (int)
-    grid_length = 128
+    grid_length = 100
     # Define number of grid points (int)
-    n_points = 4 * grid_length
+    n_points = 20 * grid_length
     # Define Point spacing
     delta_x = np.float32(grid_length / n_points)
     # Set time step
