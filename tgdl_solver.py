@@ -14,11 +14,11 @@ import tgdl_functions as tf
 def main():
     """Solve the TGDL Equation."""
     # Define number of processes
-    n_proc = 10
+    n_proc = 20
     # Define number of runs
     number_runs = 100
     # Where to save the numerical solutions
-    data_loc = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
+    data_loc = '/scratch/yqb16161/TGDL_Solutions/'
     if not os.path.exists(data_loc):
         os.makedirs(data_loc)
     # Define square grid length (int)
@@ -46,7 +46,7 @@ def main():
     # Get the nearest neighbours of each grid point
     tf.get_all_neighbours(neighbours, n_points)
     # Specify the number of snapshots to save
-    n_snaps = 501
+    n_snaps = 51
     # Array tol hold points in time at which to store current state of the grid
     sample_times = np.zeros(n_snaps, dtype=np.float64)
     # Set log spaced points in time
