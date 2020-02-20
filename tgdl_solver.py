@@ -14,7 +14,7 @@ import tgdl_functions as tf
 def main():
     """Solve the TGDL Equation."""
     # Define number of processes
-    n_proc = 15
+    n_proc = 10
     # Define number of runs
     number_runs = 100
     # Where to save the numerical solutions
@@ -46,11 +46,11 @@ def main():
     # Get the nearest neighbours of each grid point
     tf.get_all_neighbours(neighbours, n_points)
     # Specify the number of snapshots to save
-    n_snaps = 51
+    n_snaps = 501
     # Array tol hold points in time at which to store current state of the grid
     sample_times = np.zeros(n_snaps, dtype=np.float64)
     # Set log spaced points in time
-    sample_times[1:] = np.logspace(-2, 1, n_snaps - 1, dtype=np.float64)
+    sample_times[1:] = np.logspace(-2, 3, n_snaps - 1, dtype=np.float64)
     # Start the clock to estimate the total time taken for this lattice size
     times = np.zeros(2, dtype=np.float64)
     times[0] = time.time()

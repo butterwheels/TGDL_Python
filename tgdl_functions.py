@@ -72,7 +72,6 @@ def get_snapshots(sample_times, delta_time, grid_sol, neighbours, dx,
         grid_sol += (delta_time * output_grid)
 
         if current_time >= sample_times[counter]:
-            print(counter)
             snapshots[:, :, counter] = grid_sol
             measured_times[counter] = current_time
             counter += 1
