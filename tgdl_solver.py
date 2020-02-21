@@ -14,9 +14,9 @@ import tgdl_functions as tf
 def main():
     """Solve the TGDL Equation."""
     # Define number of processes
-    n_proc = 20
+    n_proc = 24
     # Define number of runs
-    number_runs = 100
+    number_runs = 48
     # Where to save the numerical solutions
     data_loc = '/scratch/yqb16161/TGDL_Solutions/'
     if not os.path.exists(data_loc):
