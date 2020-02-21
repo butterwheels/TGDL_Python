@@ -26,9 +26,9 @@ def main():
     # Define number of grid points (int)
     n_points = 10 * grid_length
     # Define Point spacing
-    delta_x = np.float64(grid_length / n_points)
+    delta_x = np.float32(grid_length / n_points)
     # Set time step
-    delta_time = np.float64(0.1 * delta_x ** 2)
+    delta_time = np.float32(0.1 * delta_x ** 2)
     print("The time step is %f" % delta_time)
     # Check stability condition
     von_newmann = (delta_time / (delta_x ** 2.))
@@ -46,13 +46,13 @@ def main():
     # Get the nearest neighbours of each grid point
     tf.get_all_neighbours(neighbours, n_points)
     # Specify the number of snapshots to save
-    n_snaps = 51
+    n_snaps = 501
     # Array tol hold points in time at which to store current state of the grid
-    sample_times = np.zeros(n_snaps, dtype=np.float64)
+    sample_times = np.zeros(n_snaps, dtype=np.float32)
     # Set log spaced points in time
-    sample_times[1:] = np.logspace(-2, 3, n_snaps - 1, dtype=np.float64)
+    sample_times[1:] = np.logspace(-2, 3, n_snaps - 1, dtype=np.float32)
     # Start the clock to estimate the total time taken for this lattice size
-    times = np.zeros(2, dtype=np.float64)
+    times = np.zeros(2, dtype=np.float32)
     times[0] = time.time()
     # Launch the quenches as independent parallel processes
     pool = mp.Pool(processes=n_proc)
