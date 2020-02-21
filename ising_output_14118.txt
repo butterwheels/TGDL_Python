@@ -1,0 +1,7 @@
+/scratch/yqb16161/TGDL_Python
+ribbo3.phys.strath.ac.uk
+Thu 20 Feb 10:54:54 GMT 2020
+Running MPI test program on 1 nodes with
+24 tasks, each with 1 cores.
+The time step is 0.001000
+Von Neumann stability criterion met, 0.10 <= 0.5
