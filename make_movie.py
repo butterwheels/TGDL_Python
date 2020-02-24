@@ -9,22 +9,22 @@ plt.rc('text', usetex=True)
 plt.rc('font', family='serif')
 
 # Path to the location you want to make a movie of
-load_path = '/home/james/Ising_Model_Codes/TGDL_Solutions/'
-file_name = 'diagonal.npy'
+load_path = '/users/james/Ising_Model_Codes/TGDL_Solutions/'
+file_name = 'diagonal_1.npy'
 
 snapshots = np.load(load_path + file_name)
 sample_times = np.load(load_path + 'measured_times.npy')
 
 # Where to save the movie
 file_name = file_name[:-4]
-save_path = ('/home/james/Ising_Model_Codes/TGDL_movies/')
+save_path = ('/users/james/Ising_Model_Codes/TGDL_movies/')
 if not os.path.exists(save_path):
     os.makedirs(save_path)
 
 FFMpegWriter = manimation.writers['ffmpeg']
 metadata = dict(title='TGDL mess around',
                 artist='James Denholm', comment='Movie support!')
-writer = FFMpegWriter(fps=10, metadata=metadata)
+writer = FFMpegWriter(fps=2, metadata=metadata)
 
 cmap = 'RdGy'
 

@@ -1,0 +1,36 @@
+#!/bin/bash
+##
+# Propagate environment variables to the compute node
+#SBATCH --export=ALL
+# Run in the Parallel queue
+#SBATCH --partition=cnqo_intel
+# Distribute processes in round-robin fashion
+#SBATCH --distribution=cyclic:cyclic
+# No. of tasks required
+#SBATCH --ntasks=24
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=1
+#SBATCH --ntasks-per-node=24
+# Runtime (hard)
+#SBATCH --time=300:00:00
+#SBATCH --nodelist=ribbo3
+
+# Job name
+#SBATCH --job-name=ginzburg-landau
+# Output file
+#SBATCH --output=ising_output_%j.txt
+pwd; hostname; date
+echo "Running MPI test program on $SLURM_JOB_NUM_NODES nodes with
+$SLURM_NTASKS tasks, each with $SLURM_CPUS_PER_TASK cores."
+
+# mail alert at start, end and abortion of execution
+#SBATCH --mail-type=END
+
+# send mail to this address
+#SBATCH --mail-user=j.denholm@strath.ac.uk
+
+
+module purge
+module load applications/conda/miniconda3
+
+./tgdl_solver.py
